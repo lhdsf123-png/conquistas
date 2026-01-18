@@ -22,7 +22,8 @@
 </div>
 
 <h2>Adicionar nova conquista</h2>
-<form action="/add" method="post" enctype="multipart/form-data" class="mb-4">
+<form method="POST" action="{{ url_for('add') }}" enctype="multipart/form-data">
+
     <div class="mb-2">
         <label>Jogo</label>
         <input type="text" name="jogo" class="form-control" required>
@@ -43,12 +44,14 @@
         <label>Descrição</label>
         <input type="text" name="descricao" class="form-control" required>
     </div>
-    <div class="mb-2">
-        <label>Foto da conquista</label>
-        <input type="file" name="foto" accept="image/*" capture="camera" class="form-control" required>
+    <div class="mb-3">
+        <label for="fotos" class="form-label">Fotos da conquista</label>
+        <input type="file" name="fotos" id="fotos" class="form-control" accept="image/*" multiple>
     </div>
-    <button type="submit" class="btn btn-primary">Salvar</button>
+    <button type="submit" class="btn btn-success w-100">Salvar Conquista</button>
+
 </form>
 
 <a href="/desafios" class="btn btn-warning mt-3">🔥 Ver Desafios</a>
+
 {% endblock %}
