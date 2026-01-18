@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title if title else "Conquistas de Jogos" }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #fff;
+            font-family: 'Press Start 2P', cursive;
+        }
+        h1, h2, h3 { color: #ffcc00; text-shadow: 2px 2px #000; }
+        .navbar { background: #0f3460 !important; }
+        .btn-primary { background-color: #e94560; border: none; }
+        .btn-warning { background-color: #ffcc00; color: #000; font-weight: bold; }
+        .btn-success { background-color: #32cd32; border: none; }
+        .card { background: #16213e; border: 2px solid #e94560; border-radius: 10px; color: #fff; }
+        .list-group-item { background: #0f3460; color: #fff; border: none; }
+        .progress { background-color: #0f3460; }
+        .progress-bar { background-color: #32cd32; }
+        .bronze { color: #cd7f32; font-weight: bold; }
+        .prata { color: #c0c0c0; font-weight: bold; }
+        .ouro { color: #ffd700; font-weight: bold; }
+        .platina { color: #00ffff; font-weight: bold; }
+        .intermediario { color: #32cd32; font-weight: bold; }
+        a.text-light { color: #fff !important; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark mb-4">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">🏆 Conquistas</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    {% if current_user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link" href="/ranking">Ranking</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/desafios">Desafios</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/logout">Sair</a></li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/signup">Cadastro</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-warning">
+                    {% for msg in messages %}
+                        <p>{{ msg }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

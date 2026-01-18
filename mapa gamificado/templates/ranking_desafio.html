@@ -1,0 +1,22 @@
+<h1>🏆 Ranking do Desafio: {{ desafio.titulo }}</h1>
+<p><small>Termina em {{ desafio.data_fim.strftime("%d/%m/%Y") }}</small></p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Jogador</th>
+            <th>Pontos</th>
+            <th>Troféu</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for username, pontos, trofeu in ranking %}
+        <tr>
+            <td>{{ username }}</td>
+            <td>{{ pontos }}</td>
+            <td>{% if trofeu %}🏆 Vencedor{% else %}-{% endif %}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="/desafios" class="btn btn-secondary">Voltar</a>

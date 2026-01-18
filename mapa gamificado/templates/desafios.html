@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>🔥 Desafios</h1>
+<a href="/desafios/criar" class="btn btn-primary mb-3">Criar novo desafio</a>
+
+<div class="row">
+    {% for d in desafios %}
+    <div class="col-md-6 mb-3">
+        <div class="card p-3">
+            <h4>{{ d.titulo }}</h4>
+            <p>{{ d.descricao }}</p>
+            <small>Início: {{ d.data_inicio.strftime("%d/%m/%Y") }} | Término: {{ d.data_fim.strftime("%d/%m/%Y") }}</small><br>
+            <a href="/desafios/entrar/{{ d.id }}" class="btn btn-success btn-sm mt-2">Participar</a>
+            <a href="/desafios/{{ d.id }}/ranking" class="btn btn-outline-warning btn-sm mt-2">Ver ranking</a>
+            <a href="/desafios/entrar/{{ d.id }}" class="btn btn-success btn-sm mt-2">Participar</a>
+           <a href="/desafios/{{ d.id }}/ranking" class="btn btn-outline-warning btn-sm mt-2">Ver ranking</a>
+           <a href="/desafios/{{ d.id }}/encerrar" class="btn btn-danger btn-sm mt-2">Encerrar</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

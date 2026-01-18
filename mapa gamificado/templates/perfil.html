@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>🎮 Perfil de {{ usuario }}</h1>
+<div class="card p-3 mb-4 text-center">
+    <img src="{{ avatar }}" alt="Avatar" class="img-thumbnail mb-3" width="150">
+    <p><strong>Pontos:</strong> {{ pontos }}</p>
+    <p><strong>Nível:</strong> <span class="{{ nivel[1] }}">{{ nivel[0] }}</span></p>
+    <p><strong>Bio:</strong> {{ bio }}</p>
+</div>
+
+<h2>Estatísticas</h2>
+<ul class="list-group mb-4">
+    <li class="list-group-item">Jogos zerados: {{ jogos_zerados }}</li>
+    <li class="list-group-item">Inimigos mortos: {{ inimigos_mortos }}</li>
+    <li class="list-group-item">Conquistas especiais: {{ especiais }}</li>
+</ul>
+
+<h2>Conquistas</h2>
+<div class="row">
+    {% for c in conquistas %}
+    <div class="col-md-4 mb-3">
+        <div class="card p-2">
+            <h5>{{ c.jogo }}</h5>
+            <p>{{ c.descricao }}</p>
+            <img src="{{ url_for('static', filename='uploads/' ~ c.foto.split('/')[-1]) }}" class="img-fluid mt-2">
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<h2>📸 Galeria de Conquistas</h2>
+<div class="row">
+    {% for c in conquistas %}
+    <div class="col-md-4 mb-3">
+        <div class="card p-2 text-center">
+            <img src="{{ c.foto }}" class="img-fluid mb-2" alt="Foto da conquista">
+            <h5>{{ c.jogo }}</h5>
+            <p>{{ c.descricao }}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<a href="/ranking" class="btn btn-secondary">Voltar ao Ranking</a>
+<a href="/desafios" class="btn btn-warning">🔥 Ver Desafios</a>
+{% endblock %}

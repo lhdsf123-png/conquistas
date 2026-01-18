@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="mb-4">🎮 Bem-vindo, {{ current_user.username }}</h1>
+
+<div class="card p-3 mb-4 text-center">
+    <img src="{{ current_user.avatar }}" class="img-thumbnail mb-3" width="150">
+    <p><strong>Pontos:</strong> {{ pontos }}</p>
+    <p><strong>Nível:</strong> <span class="{{ nivel[1] }}">{{ nivel[0] }}</span></p>
+</div>
+
+<h2>Suas Conquistas</h2>
+<div class="row">
+    {% for c in conquistas %}
+    <div class="col-md-4 mb-3">
+        <div class="card p-2 text-center">
+            <img src="{{ c.foto }}" class="img-fluid mb-2" alt="Foto da conquista">
+            <h5>{{ c.jogo }}</h5>
+            <p>{{ c.descricao }}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<h2>Adicionar nova conquista</h2>
+<form action="/add" method="post" enctype="multipart/form-data" class="mb-4">
+    <div class="mb-2">
+        <label>Jogo</label>
+        <input type="text" name="jogo" class="form-control" required>
+    </div>
+    <div class="mb-2">
+        <label>Tipo</label>
+        <select name="tipo" class="form-select" required>
+            <option value="zerar">Zerar jogo</option>
+            <option value="inimigos">Matar inimigos</option>
+            <option value="especial">Conquista especial</option>
+        </select>
+    </div>
+    <div class="mb-2">
+        <label>Quantidade</label>
+        <input type="number" name="quantidade" value="1" class="form-control" required>
+    </div>
+    <div class="mb-2">
+        <label>Descrição</label>
+        <input type="text" name="descricao" class="form-control" required>
+    </div>
+    <div class="mb-2">
+        <label>Foto da conquista</label>
+        <input type="file" name="foto" accept="image/*" capture="camera" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+</form>
+
+<a href="/desafios" class="btn btn-warning mt-3">🔥 Ver Desafios</a>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="mb-4">🏆 Conquistas</h1>
+
+<ul class="list-group mb-4">
+    {% for c in conquistas %}
+        <li class="list-group-item">
+            <strong>{{ c.usuario }}</strong> - {{ c.jogo }} → {{ c.descricao }}
+        </li>
+    {% endfor %}
+</ul>
+
+<h2>Adicionar nova conquista</h2>
+<form action="/add" method="post" class="mb-4">
+    <div class="mb-2">
+        <label>Usuário</label>
+        <input type="text" name="usuario" class="form-control">
+    </div>
+    <div class="mb-2">
+        <label>Jogo</label>
+        <input type="text" name="jogo" class="form-control">
+    </div>
+    <div class="mb-2">
+        <label>Tipo</label>
+        <select name="tipo" class="form-select">
+            <option value="zerar">Zerar jogo</option>
+            <option value="inimigos">Matar inimigos</option>
+            <option value="especial">Conquista especial</option>
+        </select>
+    </div>
+    <div class="mb-2">
+        <label>Quantidade</label>
+        <input type="number" name="quantidade" value="1" class="form-control">
+    </div>
+    <div class="mb-2">
+        <label>Descrição</label>
+        <input type="text" name="descricao" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+</form>
+
+<a href="/ranking" class="btn btn-success">Ver Ranking</a>
+{% endblock %}

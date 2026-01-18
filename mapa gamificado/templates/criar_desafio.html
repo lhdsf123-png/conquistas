@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Criar Desafio</h1>
+<form method="post">
+    <div class="mb-2">
+        <label>Título</label>
+        <input type="text" name="titulo" class="form-control">
+    </div>
+    <div class="mb-2">
+        <label>Descrição</label>
+        <textarea name="descricao" class="form-control"></textarea>
+    </div>
+    <div class="mb-2">
+        <label>Data de término</label>
+        <input type="date" name="data_fim" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-success">Criar</button>
+</form>
+{% endblock %}

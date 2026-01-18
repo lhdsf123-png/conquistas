@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="mb-4">🏅 Ranking de Jogadores</h1>
+<div class="row">
+    {% for usuario, pontos, medalha, classe in ranking %}
+    <div class="col-md-6 mb-3">
+        <div class="card p-3">
+            <h5><a href="/perfil/{{ usuario }}" class="text-decoration-none text-light">{{ usuario }}</a></h5>
+            <p>Pontos: {{ pontos }}</p>
+            <div class="progress mb-2">
+                <div class="progress-bar" role="progressbar" style="width: {{ (pontos/1000)*100 }}%" aria-valuenow="{{ pontos }}" aria-valuemin="0" aria-valuemax="1000"></div>
+            </div>
+            <span class="{{ classe }}">{{ medalha }}</span>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<a href="/" class="btn btn-secondary">Voltar</a>
+<a href="/desafios" class="btn btn-warning">🔥 Lançar Desafio</a>
+{% endblock %}
