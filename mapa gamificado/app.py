@@ -7,15 +7,18 @@ import os
 
 app = Flask(__name__)
 
-# Agora usando MySQL do Railway
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv(
-    "DATABASE_URL",
-    "mysql+pymysql://root:senha@containers-us-west-123.railway.app:3306/railway"
+# Railway fornece as variáveis automaticamente, mas você pode definir no Render também
+app.config['SQLALCHEMY_DATABASE_URI'] = (
+    f"mysql+pymysql://{os.getenv('MYSQLUSER')}:{os.getenv('MYSQL_ROOT_PASSWORD')}"
+    f"@{os.getenv('RAILWAY_PRIVATE_DOMAIN')}:3306/{os.getenv('MYSQL_DATABASE')}"
 )
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'segredo123'
 
 db = SQLAlchemy(app)
+
+
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -269,3 +272,4 @@ def encerrar_desafio(desafio_id):
 if __name__ == "__main__":
 
     app.run(debug=True)
+
