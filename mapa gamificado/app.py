@@ -3,11 +3,18 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
+import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///conquistas.db'
+
+# Agora usando MySQL do Railway
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv(
+    "DATABASE_URL",
+    "mysql+pymysql://root:senha@containers-us-west-123.railway.app:3306/railway"
+)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'segredo123'
+
 db = SQLAlchemy(app)
 
 login_manager = LoginManager()
@@ -260,4 +267,5 @@ def encerrar_desafio(desafio_id):
     flash(f"Desafio '{desafio.titulo}' encerrado! 🏆 Vencedor: {User.query.get(vencedor.usuario_id).username}")
     return redirect(url_for("ranking_desafio", desafio_id=desafio.id))
 if __name__ == "__main__":
+
     app.run(debug=True)
